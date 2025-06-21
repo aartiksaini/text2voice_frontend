@@ -10,9 +10,9 @@ This is a full-stack Text-to-Speech (TTS) application with:
 
 ## 🚀 Features
 
-- Convert English or Hindi text into speech
-- Select from multiple voices per language
-- Stream and download generated audio
+- Convert English or Hindi text into speech  
+- Select from multiple voices per language  
+- Stream and download generated audio  
 - OpenAI-compatible REST API backend
 
 ---
@@ -35,6 +35,8 @@ This is a full-stack Text-to-Speech (TTS) application with:
 ---
 
 ## ⚙️ Backend Setup
+
+**GitHub Repo:** [https://github.com/aartiksaini/text2voice](https://github.com/aartiksaini/text2voice)
 
 ```bash
 cd backend
@@ -68,9 +70,9 @@ BACKEND_URL = "https://your-backend-url.onrender.com"
 
 ## 📡 API Endpoints
 
-- `GET /health` – Check server status
-- `GET /v1/voices` – List supported voices
-- `GET /api/languages` – List supported languages
+- `GET /health` – Check server status  
+- `GET /v1/voices` – List supported voices  
+- `GET /api/languages` – List supported languages  
 - `POST /v1/audio/speech` – Convert text to audio
 
 Example request:
@@ -93,4 +95,7 @@ curl -X POST https://your-backend/v1/audio/speech \
 👉 Try it here: [https://text2voice1.streamlit.app/](https://text2voice1.streamlit.app/)
 
 ---
-## For any query, contact at sainiaartik8394@gmail.com
+
+## 📬 Contact
+
+For any query, contact at **sainiaartik8394@gmail.com**
