@@ -63,7 +63,6 @@ def synthesize_speech(text, language, voice):
 def main():
     st.set_page_config(page_title="Text-to-Speech Application", page_icon="🎵", layout="wide")
     st.title("🎵 Text-to-Speech Application")
-    st.markdown("*Independent Frontend with Backend API*")
 
     backend_online = get_backend_status()
 
