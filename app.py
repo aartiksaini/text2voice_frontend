@@ -1,14 +1,9 @@
-"""
-Independent Frontend for TTS Application
-Streamlit-based web interface that connects to backend API
-"""
-
 import streamlit as st
 import requests
 import time
 import os
 
-# ✅ Get backend URL from Streamlit secrets or environment
+# Get backend URL from Streamlit secrets or environment
 BACKEND_URL = st.secrets.get("BACKEND_URL", os.getenv("BACKEND_URL", "http://localhost:8000"))
 
 def get_backend_status():
@@ -122,58 +117,6 @@ def main():
                         file_name=f"speech_{language}_{voice}_{int(time.time())}.wav",
                         mime="audio/wav"
                     )
-
-    st.divider()
-    st.subheader("🧪 API Testing")
-    col_api1, col_api2 = st.columns(2)
-    with col_api1:
-        st.markdown("**Test Backend API Directly:**")
-        api_text = st.text_input("API Test Text", placeholder="Enter text")
-        api_voice = st.selectbox("API Test Voice", options=available_voices, key="api_voice")
-        test_api_btn = st.button("🔬 Test API", disabled=not api_text.strip())
-    with col_api2:
-        if test_api_btn and api_text.strip():
-            with st.spinner("Testing API..."):
-                try:
-                    response = requests.post(
-                        f"{BACKEND_URL}/v1/audio/speech",
-                        json={
-                            "model": "tts-1",
-                            "input": api_text,
-                            "voice": api_voice,
-                            "response_format": "wav"
-                        },
-                        timeout=30
-                    )
-                    if response.status_code == 200:
-                        st.success("✅ API test successful!")
-                        st.audio(response.content, format="audio/wav")
-                        st.caption(f"Response size: {len(response.content):,} bytes")
-                    else:
-                        st.error(f"❌ API failed: {response.status_code}")
-                        st.code(response.text)
-                except Exception as e:
-                    st.error(f"❌ Error: {str(e)}")
-
-    st.divider()
-    with st.expander("📊 System Information"):
-        col1, col2 = st.columns(2)
-        with col1:
-            st.json({
-                "Backend URL": BACKEND_URL,
-                "Supported Languages": supported_languages,
-                "Backend Status": "Connected" if backend_online else "Disconnected"
-            })
-        with col2:
-            st.json(supported_voices)
-
-    with st.expander("📖 Usage Instructions"):
-        st.markdown("""
-        1. **Start Backend**: Your backend must be deployed and live.
-        2. **Update `secrets.toml`**: Ensure `BACKEND_URL` is set correctly.
-        3. **Use Interface**: Enter text, select voice, and generate audio.
-        4. **Test API**: Use the API Testing section below.
-        """)
 
 if __name__ == "__main__":
     main()
